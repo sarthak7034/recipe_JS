@@ -40,9 +40,9 @@ const createIngredient = ingredient => `
 export const renderRecipe = recipe =>{
     const markup = `
             <figure class="recipe__fig">
-                <img src="img/test-1.jpg" alt="Tomato" class="recipe__img">
+                <img src="${recipe.img}" alt="${recipe.title}" class="recipe__img">
                 <h1 class="recipe__title">
-                    <span>Pasta with tomato cream sauce</span>
+                    <span>${recipe.title}</span>
                 </h1>
         </figure>
         <div class="recipe__details">
@@ -61,12 +61,12 @@ export const renderRecipe = recipe =>{
                 <span class="recipe__info-text"> servings</span>
 
                 <div class="recipe__info-buttons">
-                    <button class="btn-tiny">
+                    <button class="btn-tiny btn-decrease">
                         <svg>
                             <use href="img/icons.svg#icon-circle-with-minus"></use>
                         </svg>
                     </button>
-                    <button class="btn-tiny">
+                    <button class="btn-tiny btn-increase">
                         <svg>
                             <use href="img/icons.svg#icon-circle-with-plus"></use>
                         </svg>
@@ -112,4 +112,16 @@ export const renderRecipe = recipe =>{
         </div>
     `;
     element.recipe.insertAdjacentHTML('afterbegin',markup)
+}
+
+export const updateServingsIngredients = recipe =>{
+    //update servings
+    document.querySelector('.recipe__info-data--people').textContent =  recipe.servings
+
+    //update ingredients
+    const countElements = Array.from(document.querySelectorAll('.recipe__count'))
+    countElements.forEach((el,i) => {
+        el.textContent = formatCount(recipe.ingredients[i].count)
+    })
+
 }

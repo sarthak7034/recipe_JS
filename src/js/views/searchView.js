@@ -11,6 +11,16 @@ export const clearResults = () => {
     element.searchResList.innerHTML = '';
     element.searchResPages.innerHTML = '';
 }
+
+export const highlightSelected = id => {
+    const resultArr = Array.from(document.querySelectorAll('.results__link'))
+    resultArr.forEach(el =>{
+        el.classList.remove('results__link--active')
+    })
+
+    document.querySelector(`a[href="#${id}"]`).classList.add('results__link--active')
+} 
+
 //Built algo to limit name on website
 const renderRecipeTitle = (title, limit) => {
     const newTitle = [];
